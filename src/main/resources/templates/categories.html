@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trapp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Categories</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:object="${category}" th:each = "category : ${categories}">
+                <td th:text="*{category}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
