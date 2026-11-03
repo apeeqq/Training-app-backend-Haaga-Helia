@@ -17,7 +17,7 @@ public class Program {
     public Program() {
     }
 
-    public Program(String name, String info, Long categoryId) {
+    public Program(String name, String info) {
         this.name = name;
         this.info = info;
     }

@@ -13,6 +13,11 @@ public class ProgramController {
     private ProgramRepository pRepository;
     private CategoryRepository cRepository;
 
+    public ProgramController(ProgramRepository pRepository, CategoryRepository cRepository) {
+        this.pRepository = pRepository;
+        this.cRepository = cRepository;
+    }
+
     @GetMapping("/index")
         public String getPrograms() {
             return "index";

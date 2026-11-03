@@ -6,5 +6,19 @@
 </head>
 <body>
 	<h1>Programs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:object="${program}" th:each = "program : ${programs}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{info}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
