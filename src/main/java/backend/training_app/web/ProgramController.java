@@ -3,8 +3,10 @@ package backend.training_app.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import backend.training_app.domain.CategoryRepository;
+import backend.training_app.domain.Program;
 import backend.training_app.domain.ProgramRepository;
 
 @Controller 
@@ -28,5 +30,18 @@ public class ProgramController {
             model.addAttribute("programs", pRepository.findAll());
             return "programs";
         }
+
+    @GetMapping("/add")
+    public String addProgram(Model model) {
+        model.addAttribute("program", new Program());
+        model.addAttribute("categories", cRepository.findAll());
+        return "addprograms";
+    }
+
+    @PostMapping("/save")
+    public String save(Program program) {
+        pRepository.save(program);
+        return "redirect:/programs";
+    }
 
 }
