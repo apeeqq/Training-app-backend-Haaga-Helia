@@ -3,6 +3,7 @@ package backend.training_app.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import backend.training_app.domain.CategoryRepository;
@@ -41,6 +42,12 @@ public class ProgramController {
     @PostMapping("/save")
     public String save(Program program) {
         pRepository.save(program);
+        return "redirect:/programs";
+    }
+
+    @GetMapping("/delete/{programId}")
+    public String deleteProgram(@PathVariable("programId") Long programId, Model model) {
+        pRepository.deleteById(programId);
         return "redirect:/programs";
     }
 
