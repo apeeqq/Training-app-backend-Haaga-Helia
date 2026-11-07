@@ -22,7 +22,7 @@ public class ProgramController {
     }
 
     @GetMapping("/index")
-        public String getPrograms() {
+        public String getHome() {
             return "index";
         }
 
