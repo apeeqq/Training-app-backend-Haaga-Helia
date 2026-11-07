@@ -51,4 +51,11 @@ public class ProgramController {
         return "redirect:/programs";
     }
 
+    @GetMapping("/edit/{programId}")
+    public String editProgram(@PathVariable("programId") Long programId, Model model) {
+        model.addAttribute("program", pRepository.findById(programId));
+        model.addAttribute("categories", cRepository.findAll());
+        return "/editprogram";
+    }
+
 }

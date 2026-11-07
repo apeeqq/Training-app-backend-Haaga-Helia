@@ -12,6 +12,7 @@
             <tr>
                 <th>Name</th>
                 <th>Info</th>
+                <th>Category</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <td th:text="*{info}"></td>
                 <td th:text="*{category.category}"></td>
                 <td><a class="btn btn-danger" th:href="@{/delete/{programId}(programId=*{programId})}">Delete</a></td>
+                <td><a class="btn btn-secondary" th:href="@{/edit/{programId}(programId=*{programId})}">Edit</a></td>
             </tr>
         </tbody>
     </table>
