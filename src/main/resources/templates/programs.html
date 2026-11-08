@@ -6,7 +6,12 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-    <h1>Hello <span sec:authentication="name"></span>!</h1>
+    <a th:if="${#authorization.expression('!isAuthenticated()')}" class="btn btn-primary" href="/login">Sign In</a>
+    <form th:if="${#authorization.expression('isAuthenticated()')}" th:action="@{/logout}" method="post">
+	    <input class="btn btn-secondary" type="submit" value="Sign Out"/>
+    </form>
+        <h1 th:if="${#authorization.expression('isAuthenticated()')}"
+        th:text="'Logged in as ' + ${#authentication.name}"></h1>
 	<h1>Programs</h1>
     <table class="table table-striped">
         <thead>
