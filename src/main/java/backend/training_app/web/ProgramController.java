@@ -35,12 +35,25 @@ public class ProgramController {
             return "programs";
         }
 
+    //Get Mapping for adding program
     @GetMapping("/add")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String addProgram(Model model) {
         model.addAttribute("program", new Program());
         model.addAttribute("categories", cRepository.findAll());
         return "addprograms";
+    }
+
+    //Save and validation of adding program
+    @PostMapping("/add/post")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String addProgramPost(@Valid Program program, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", cRepository.findAll());
+            return "addprograms";
+        }
+        pRepository.save(program);
+        return "redirect:/programs";
     }
 
     //Save and validation of editing program
