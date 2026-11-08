@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import backend.training_app.domain.Program;
 import backend.training_app.domain.ProgramDTO;
 import backend.training_app.domain.ProgramRepository;
 

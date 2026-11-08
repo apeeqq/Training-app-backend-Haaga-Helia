@@ -3,6 +3,7 @@ package backend.training_app.web;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import backend.training_app.domain.CategoryRepository;
 import backend.training_app.domain.Program;
 import backend.training_app.domain.ProgramRepository;
+import jakarta.validation.Valid;
 
 @Controller 
 public class ProgramController {
@@ -41,9 +43,14 @@ public class ProgramController {
         return "addprograms";
     }
 
-    @PostMapping("/save")
+    //Save and validation of editing program
+    @PostMapping("/edit/post")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String save(Program program) {
+    public String saveProgram(@Valid Program program, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("categories", cRepository.findAll());
+            return "editprogram";
+        }
         pRepository.save(program);
         return "redirect:/programs";
     }
@@ -55,6 +62,7 @@ public class ProgramController {
         return "redirect:/programs";
     }
 
+    //Get Mapping for editing program
     @GetMapping("/edit/{programId}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String editProgram(@PathVariable("programId") Long programId, Model model) {

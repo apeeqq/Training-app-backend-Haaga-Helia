@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity 
 public class Program {
@@ -15,7 +16,9 @@ public class Program {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long programId;
+    @NotBlank(message = "Name is required")
     private String name;
+    @NotBlank(message = "Info is required")
     private String info;
 
     @ManyToOne

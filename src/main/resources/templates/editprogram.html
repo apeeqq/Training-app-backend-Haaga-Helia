@@ -8,13 +8,15 @@
 <body>
     <h1>Edit Program</h1>
     <div>
-    <form class="row" th:object="${program}" th:action="@{../save}" action="#" method="post">
+    <form class="row" th:object="${program}" th:action="@{../edit/post}" action="#" method="post">
         <label for="programId"></label>
         <input type="hidden" th:field="*{programId}" class="form-control"/>
         <label for="name">Name</label>
-        <input type="text" id="name" th:field="*{name}" />
+        <input type="text" id="name" th:field="*{name}"/>
+        <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         <label for="info">Info</label>
-        <textarea rows="10" id="info" th:field="*{info}" />
+        <textarea rows="10" id="info" th:field="*{info}"/>
+        <span class="error" th:if="${#fields.hasErrors('info')}" th:errors="*{info}"></span>
         <select id="categorylist" th:field="*{category}" class="form-control">
             <option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.category}"></option>
         </select>
