@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Trapp</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
+    <h1>Hello <span sec:authentication="name"></span>!</h1>
 	<h1>Programs</h1>
     <table class="table table-striped">
         <thead>
@@ -20,11 +21,11 @@
                 <td th:text="*{name}"></td>
                 <td th:text="*{info}"></td>
                 <td th:text="*{category.category}"></td>
-                <td><a class="btn btn-danger" th:href="@{/delete/{programId}(programId=*{programId})}">Delete</a></td>
-                <td><a class="btn btn-secondary" th:href="@{/edit/{programId}(programId=*{programId})}">Edit</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{programId}(programId=*{programId})}">Delete</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-secondary" th:href="@{/edit/{programId}(programId=*{programId})}">Edit</a></td>
             </tr>
         </tbody>
     </table>
-    <a class="btn btn-success" href="/add">Add Training Program</a>
+    <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/add">Add Training Program</a>
 </body>
 </html>
