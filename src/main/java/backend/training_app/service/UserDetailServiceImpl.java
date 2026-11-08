@@ -12,17 +12,17 @@ import backend.training_app.domain.AppUserRepository;
 @Service 
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    private final AppUserRepository aRepository;
+    private final AppUserRepository appUserRepository;
 
-    public UserDetailServiceImpl(AppUserRepository aRepository) {
-        this.aRepository = aRepository;
+    public UserDetailServiceImpl(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
     }
 
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser curruser = aRepository.findByUsername(username);
+        AppUser curruser = appUserRepository.findByUsername(username);
         UserDetails user = new org.springframework.security.core.userdetails.User(username,curruser.getPasswordHash(),
 		AuthorityUtils.createAuthorityList(curruser.getRole()));
 		return user;

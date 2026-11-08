@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import backend.training_app.domain.AppUser;
+import backend.training_app.domain.AppUserRepository;
 import backend.training_app.domain.Category;
 import backend.training_app.domain.CategoryRepository;
 import backend.training_app.domain.Program;
@@ -18,12 +20,14 @@ public class TrainingAppApplication {
 	private static final Logger log = LoggerFactory.getLogger(TrainingAppApplication.class);
 	private final ProgramRepository pRepository;
 	private final CategoryRepository cRepository;
+	private final AppUserRepository appUserRepository;
 
 	
 
-	public TrainingAppApplication(ProgramRepository pRepository, CategoryRepository cRepository) {
+	public TrainingAppApplication(ProgramRepository pRepository, CategoryRepository cRepository, AppUserRepository appUserRepository) {
 		this.pRepository = pRepository;
 		this.cRepository = cRepository;
+		this.appUserRepository = appUserRepository;
 	}
 
 	public static void main(String[] args) {
@@ -57,6 +61,12 @@ public class TrainingAppApplication {
 			for (Program program : pRepository.findAll()) {
 				log.info(program.toString());
 			}
+
+			AppUser user1 = new AppUser("admin", "$2a$10$TPZtywb.2j7qo13Dpswb.OSmuVniymuxWBKUv4AclSes2fouJJEEG", "user1@user1.com", "ADMIN");
+			AppUser user2 = new AppUser("typical-guy", "$2a$10$nXoxgKxRl858seQsj1kf.OJ9Li0iBAE0894MFjtoh4/xGgHBKDM72", "user2@user2.com", "USER");
+
+			appUserRepository.save(user1);
+			appUserRepository.save(user2);
 
 		};
 	}
