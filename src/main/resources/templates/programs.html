@@ -13,6 +13,7 @@
         <h1 th:if="${#authorization.expression('isAuthenticated()')}"
         th:text="'Logged in as ' + ${#authentication.name}"></h1>
 	<h1>Programs</h1>
+    <p>Programs are also available at REST API endpoint: /rest/programs</p>
     <table class="table table-striped">
         <thead>
             <tr>
